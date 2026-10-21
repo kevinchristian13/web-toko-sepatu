@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Katalog Sepatu - Toko Sepatu Online{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">Katalog Produk Sepatu</h2>
+            <p class="text-muted mb-0">Daftar stok dan koleksi sepatu terkini</p>
+        </div>
+        <div>
+            <a href="{{ url_for('hapus_stok_habis') }}" class="btn btn-outline-danger me-2" onclick="return confirm('Yakin ingin menghapus semua sepatu yang stoknya habis?')">
+                <i class="bi bi-trash-fill me-1"></i> Hapus Stok Habis
+            </a>
+            <a href="{{ url_for('tambah_produk') }}" class="btn btn-success">
+                <i class="bi bi-plus-lg me-1"></i> Tambah Produk
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for sepatu in sepatu_list %}
+        <div class="col-md-3">
+            <div class="card card-product h-100 shadow-sm position-relative">
+                <span class="badge bg-secondary badge-kategori">{{ sepatu.kategori }}</span>
+                <img src="{{ sepatu.gambar }}" class="card-img-top" alt="{{ sepatu.nama }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold text-truncate">{{ sepatu.nama }}</h5>
+                    <p class="text-primary fw-bold fs-5 mb-1">Rp {{ sepatu.harga_fmt }}</p>
+                    
+                    {% if sepatu.stok > 0 %}
+                    <p class="text-muted small mb-3">Stok Tersedia: {{ sepatu.stok }} pasang</p>
+                    {% else %}
+                    <p class="text-danger fw-bold small mb-3"><i class="bi bi-x-circle me-1"></i>Stok Habis</p>
+                    {% endif %}
+
+                    <div class="mt-auto d-flex gap-2">
+                        {% if sepatu.stok > 0 %}
+                        <a href="{{ url_for('tambah_keranjang', sepatu_id=sepatu.id) }}" class="btn btn-outline-primary flex-grow-1">
+                            <i class="bi bi-cart-plus me-1"></i> Beli
+                        </a>
+                        {% else %}
+                        <button class="btn btn-secondary flex-grow-1" disabled>Habis</button>
+                        {% endif %}
+
+                        <a href="{{ url_for('hapus_produk', sepatu_id=sepatu.id) }}" class="btn btn-outline-danger" onclick="return confirm('Yakin ingin menghapus {{ sepatu.nama }} dari katalog?')" title="Hapus Produk">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

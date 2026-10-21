@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Profil & Bantuan - Toko Sepatu Online{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 text-center p-4">
+                <div class="mb-3">
+                    <i class="bi bi-person-circle display-1 text-primary"></i>
+                </div>
+                <h4>Tim Pengembang</h4>
+                <p class="text-muted">Proyek ETS Sistem Informasi E-Commerce Sepatu</p>
+                <hr>
+                <ul class="list-unstyled text-start small">
+                    <li><strong>Mata Kuliah:</strong> Pengembangan Web / Sistem Informasi</li>
+                    <li><strong>Framework:</strong> Python Flask & Bootstrap 5</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 p-4">
+                <h4 class="fw-bold mb-3"><i class="bi bi-question-circle me-2"></i>Pusat Bantuan & Penggunaan</h4>
+                <div class="accordion" id="accordionHelp">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Bagaimana cara melihat stok sepatu?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#accordionHelp">
+                            <div class="accordion-body">
+                                Anda dapat menavigasi ke menu <strong>Data Sepatu</strong> untuk melihat seluruh katalog produk beserta harga dan stok pasang sepatu yang tersedia.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Bagaimana cara menambah item baru ke katalog?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#accordionHelp">
+                            <div class="accordion-body">
+                                Buka menu <strong>Tambah Sepatu</strong>, isikan informasi detail sepatu seperti nama, harga, stok, dan pilih foto langsung dari perangkat Anda, lalu klik Simpan.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

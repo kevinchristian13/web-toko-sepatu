@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout - Toko Sepatu Online{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="fw-bold mb-4"><i class="bi bi-credit-card me-2"></i>Form Checkout Pemesanan</h2>
+
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-person-lines-fill me-2"></i>Informasi Pengiriman</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nama Lengkap Pembeli</label>
+                            <input type="text" class="form-control" name="nama_pembeli" placeholder="Masukkan nama lengkap Anda" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Nomor WhatsApp / HP</label>
+                                <input type="tel" class="form-control" name="no_hp" placeholder="08123456789" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Metode Pembayaran</label>
+                                <select class="form-select" name="pembayaran">
+                                    <option value="Transfer Bank (BCA/Mandiri)">Transfer Bank (BCA / Mandiri)</option>
+                                    <option value="E-Wallet (GoPay/OVO/Dana)">E-Wallet (GoPay / OVO / DANA)</option>
+                                    <option value="COD (Bayar di Tempat)">COD (Bayar di Tempat)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Alamat Lengkap Pengiriman</label>
+                            <textarea class="form-control" name="alamat" rows="3" placeholder="Jalan, No. Rumah, Kecamatan, Kota, Kode Pos" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg w-100 shadow mt-3">
+                            <i class="bi bi-check-circle me-2"></i>Konfirmasi & Buat Pesanan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0 p-4">
+                <h5 class="fw-bold border-bottom pb-2 mb-3">Rincian Pesanan</h5>
+                <ul class="list-group list-group-flush mb-3">
+                    {% for item in items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <div>
+                            <h6 class="my-0 fw-bold">{{ item.sepatu.nama }}</h6>
+                            <small class="text-muted">{{ item.qty }} x Rp {{ item.sepatu.harga_fmt }}</small>
+                        </div>
+                        <span class="fw-bold text-dark">Rp {{ item.subtotal_fmt }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="d-flex justify-content-between fs-5 fw-bold border-top pt-3">
+                    <span>Total Pembayaran:</span>
+                    <span class="text-primary">Rp {{ total_harga }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
